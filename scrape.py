@@ -106,7 +106,7 @@ def data_to_excel_everything():
 		sheet.column_dimensions['C'].width = 20
 		sheet.column_dimensions['D'].width = 255
 
-		print(f'"{news_topics[i]}" topic was succesfully added.')
+		print(f'"{news_topics[i]}" topic has been added successfully.')
 
 	del excel['Sheet']
 
@@ -138,7 +138,7 @@ def data_to_excel_particular(topic):
 
 	excel.save(f'The Google News ({topic}).xlsx')
 
-	print(f'"{topic}" topic was succesfully added.')
+	print(f'"{topic}" topic has been added successfully.')
 	print('Execution done.')
 
 
