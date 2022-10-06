@@ -1,5 +1,5 @@
 # google-news-scraping
-The script scrapes the news from the Google News and exports them to the Microsoft Excel in a convenient format.
+The script scrapes the news from the Google News and exports them into the Microsoft Excel file in a convenient format.
 
 All you need is to choose what topic you are interested in.
 There are 10 of them: "My country news", "World", "My local news", "Business", "Technologies", "Entertainment", "Sports", "Science", "Health" and "Everything". 
