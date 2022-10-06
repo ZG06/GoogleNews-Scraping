@@ -9,7 +9,8 @@ excel = openpyxl.Workbook()
 
 def topics_choosing():
 	'''Allowes user to select a topic they are interested in.
-		Checks, wheather the input value is valid or not.'''
+	   Checks, wheather the input value is valid or not.'''
+	
 	global news_topics
 	news_topics = ['My country news', 'World', 'My local news', 'Business', 'Technologies',
 					   'Entertainment', 'Sports', 'Science', 'Health', 'Everything']
@@ -28,7 +29,7 @@ def topics_choosing():
 		topic = input(': ')
 
 		if topic not in news_topics:
-			print('Please, specify the right topic.\n')
+			print('Please, specify the right topic\n')
 		else:
 			print('----------------------------------')
 			return topic
@@ -70,7 +71,7 @@ def url_setting(topic):
 
 def news_scraping(topic_url, sheet):
 	'''Takes a topic as an input.
-		Scrapes title, news company, publishing time and link.'''
+	   Scrapes title, news company, publishing time and link.'''
 
 	r = requests.get(topic_url)
 	soup = BeautifulSoup(r.text, 'lxml')
@@ -108,7 +109,8 @@ def data_to_excel_everything():
 
 		print(f'"{news_topics[i]}" topic has been added successfully.')
 
-	del excel['Sheet']
+	if 'Sheet' in excel.sheetnames:
+		del excel['Sheet']
 
 	excel.save('The Google News (Everything).xlsx')
 
@@ -129,24 +131,51 @@ def data_to_excel_particular(topic):
 	sheet['C1'].font = ft
 	sheet['D1'].font = ft
 
-	del excel['Sheet']
+	if 'Sheet' in excel.sheetnames:
+		del excel['Sheet']
 
 	sheet.column_dimensions['A'].width = 150
-	sheet.column_dimensions['B'].width = 25
-	sheet.column_dimensions['C'].width = 20
+	sheet.column_dimensions['B'].width = 25  
+	sheet.column_dimensions['C'].width = 20 
 	sheet.column_dimensions['D'].width = 255
 
 	excel.save(f'The Google News ({topic}).xlsx')
 
-	print(f'"{topic}" topic has been added successfully.')
+	print(f'"{topic}" has been added successfully.')
 	print('Execution done.')
 
 
-topic = topics_choosing()
+def exec():
+	'''Executes the code'''
+	topic = topics_choosing()
 
-if topic == 'Everything':
-	data_to_excel_everything()
-	input('\nPress ENTER to exit')
-else:
-	data_to_excel_particular(topic)
-	input('\nPress ENTER to exit')
+	if topic == 'Everything':
+		data_to_excel_everything()
+		print()
+
+	else:
+		data_to_excel_particular(topic)
+		print()
+
+
+exec() # Executing the code
+
+
+print('Do you you want to scrape something else (y/n)\n')
+
+while True:
+	answer = input(': ')
+	if answer == 'y':
+		print()
+
+		exec()
+		break
+
+	elif answer == 'n':
+		print()
+
+		input('\nPress ENTER to exit')
+		break
+
+	else:
+		print('Please, specify the right value\n')
